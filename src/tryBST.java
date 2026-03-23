@@ -93,5 +93,34 @@ void buildBalanced(int start,int end){
 
         long[] populateTimes = new long[runs];
         long[] deleteTimes = new long[runs];
+        for (int i = 0; i < runs; i++) {
+
+            tryBST tree = new tryBST();
+
+            // Populate timing
+            long start = System.nanoTime();
+            tree.buildBalanced(1, max);
+            long end = System.nanoTime();
+            populateTimes[i] = (end - start) / 1_000_000;
+            if (!tree.isBST()) {
+                System.out.println("Error: Not a BST!");
+                return;
+            }
+            start = System.nanoTime();
+            tree.removeEvens(max);
+            end = System.nanoTime();
+            deleteTimes[i] = (end - start) / 1_000_000;
+        }
+        double avgPop = average(populateTimes);
+        double stdPop = stdDev(populateTimes, avgPop);
+
+        double avgDel = average(deleteTimes);
+        double stdDel = stdDev(deleteTimes, avgDel);
+
+        System.out.println("Method\t\tKeys\tAvg(ms)\tStdDev");
+        System.out.println("Populate tree\t" + n + "\t" + avgPop + "\t" + stdPop);
+        System.out.println("Remove evens\t" + n + "\t" + avgDel + "\t" + stdDel);
+
     }
+
 }
