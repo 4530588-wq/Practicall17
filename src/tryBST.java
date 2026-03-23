@@ -1,16 +1,38 @@
-import java.util.*;
-class tNode{
+class tNode {
     int key;
-    tNode left, right ;
-    public tNode(int item){
+    tNode left, right;
+
+    public tNode(int item) {
         key = item;
         left = right = null;
     }
 }
-class BSR{
+public class tryBST {
+
     tNode root;
-    tNode insertRec(tNode root,int key){
-        
+
+    // Insert into BST
+    tNode insertRec(tNode root, int key) {
+        if (root == null) {
+            root = new tNode(key);
+            return root;
+        }
+
+        if (key < root.key)
+            root.left = insertRec(root.left, key);
+        else if (key > root.key)
+            root.right = insertRec(root.right, key);
+
+        return root;
+    }
+    void insert(int key){
+        root = insertRec(root, key);
+    }
+    tNode deleteRec(tNode root,int key){
+        if(root == null) return root;
+        if (key < root.key)
+            root.left = deleteRec(root.left, key);
+        else if (key > root.key)
+            root.right = deleteRec(root.right, key);
     }
 }
-
