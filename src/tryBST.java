@@ -34,5 +34,22 @@ public class tryBST {
             root.left = deleteRec(root.left, key);
         else if (key > root.key)
             root.right = deleteRec(root.right, key);
+        else{
+            if(root.left == null) return root.right;
+            else if(root.right == null) return root.left;
+            root.key = minValue(root.right);
+            root.right = deleteRec(root.right, root.key);
+        }
+        return root;
+    }
+    void delete(int key){
+        root = deleteRec(root,key);
+    }
+    int minValue(tNode root){
+        int minv = root.key;
+        while (root.left != null) {
+            root = root.left;
+            minv = root.key;
+        }
     }
 }
