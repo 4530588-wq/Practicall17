@@ -51,5 +51,30 @@ public class tryBST {
             root = root.left;
             minv = root.key;
         }
+        return minv;
+    }
+    boolean isBST(){
+        return isBSTRec(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+    boolean isBSTRec(tNode node,int min,int max){
+        if(node == null) return true;
+        if(node.key <= min || node.key >= max) return false;
+        return isBSTRec(node.left, min, node.key) &&
+                isBSTRec(node.right, node.key, max);
+}
+void buildBalanced(int start,int end){
+        if(start > end) return;
+        int mid = (start + end)/2;
+        insert(mid);
+        buildBalanced(start,mid-1);
+        buildBalanced(mid+1,end);
+    }
+    void removeEvens(int max){
+        for (int i = 2; i <= max; i += 2) {
+            delete(i);
+        }
+    }
+    static double average(long[] arr){
+
     }
 }
