@@ -75,6 +75,23 @@ void buildBalanced(int start,int end){
         }
     }
     static double average(long[] arr){
+        long sum = 0;
+        for (long v : arr) sum += v;
+        return sum / (double) arr.length;
+    }
+    static double stdDev(long[] arr,double avg){
+        double sum = 0;
+        for (long v : arr)
+            sum += Math.pow(v - avg, 2);
+        return Math.sqrt(sum / arr.length);
+    }
+    public static void main(String[] args){
+        int n = 7; // test small first, then try 20
+        int max = (int)Math.pow(2, n) - 1;
 
+        int runs = 30;
+
+        long[] populateTimes = new long[runs];
+        long[] deleteTimes = new long[runs];
     }
 }
